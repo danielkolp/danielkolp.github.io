@@ -4,13 +4,19 @@ export default function AnimatedGradient({
   colors = ['#ff6a00', '#00b7ff', '#ff8b00'],
   animationSpeed = 8,
   showBorder = false,
+  mode = 'text',
 }) {
   const gradientStyle = {
     backgroundImage: `linear-gradient(90deg, ${colors.join(', ')})`,
     animationDuration: `${animationSpeed}s`,
   }
 
-  const textClass = 'animate-gradient-flow bg-[length:300%_100%] bg-clip-text text-transparent'
+  const animatedBaseClass = 'animate-gradient-flow bg-[length:300%_100%]'
+  const textClass = `${animatedBaseClass} bg-clip-text text-transparent`
+
+  if (mode === 'background') {
+    return <span className={`${animatedBaseClass} inline-block ${className}`.trim()} style={gradientStyle} aria-hidden="true" />
+  }
 
   return (
     <span className={`inline-block ${className}`.trim()}>

@@ -14,6 +14,7 @@ import {
   SiVite,
 } from 'react-icons/si'
 import { TbBrandAdobeIllustrator, TbBrandAdobePhotoshop } from 'react-icons/tb'
+import PhysicsGrid from './PhysicsGrid'
 
 function AbletonIcon({ className = '', ...rest }) {
   return (
@@ -38,7 +39,7 @@ const actionLinkClass =
 function LetterIcon({ children, className = '' }) {
   return (
     <span
-      className={`grid h-20 w-20 shrink-0 place-items-center border border-white/15 bg-white/[0.04] font-serif text-[1.16rem] leading-none text-[#f5f1e8] transition-[color,transform,filter,border-color] duration-500 will-change-transform [transform-style:preserve-3d] group-hover:[transform:perspective(700px)_rotateX(16deg)_rotateY(-18deg)_rotateZ(5deg)_scale(1.08)] group-hover:drop-shadow-[0_12px_20px_rgba(255,106,0,0.24)] ${className}`}
+      className={`grid h-20 w-20 shrink-0 place-items-center border border-white/15 bg-white/[0.04] font-serif text-[1.16rem] leading-none text-[#f5f1e8] transition-[color,transform,filter,border-color] duration-500 will-change-transform [transform-style:preserve-3d] group-hover:[transform:perspective(700px)_rotateX(16deg)_rotateY(-18deg)_rotateZ(5deg)_scale(1.08)] group-hover:drop-shadow-[0_12px_20px_rgba(255,106,0,0.24)] max-md:h-10 max-md:w-10 max-md:text-[0.72rem] ${className}`}
       aria-hidden="true"
     >
       {children}
@@ -51,7 +52,7 @@ function LetterIcon({ children, className = '' }) {
 const aboutMeParagraphs = [
   "I enjoy building things that feel alive, but I care just as much about the fundamentals that make an experience reliable. For me, creative work still needs structure, clarity, and purpose in every decision.",
   "I studied New Media Design and Web Development at BCIT, and I spend a lot of time experimenting with motion, 3D systems, and AI-driven tools. That blend of technical depth and visual thinking is where I do my best work.",
-  "Long term, I want to build products that are both useful and expressive. I care about collaborating with people who take craft seriously, move quickly, and build things that genuinely solve problems.",
+  "I play a decent amount of video games (huge fan of a few roguelikes such as Balatro), and I like to mess around on Ableton Live when I get the chance.",
 ]
 
 const tools = [
@@ -69,24 +70,26 @@ const tools = [
   { name: 'Photoshop', Icon: TbBrandAdobePhotoshop },
 ]
 
-const motivations = [
+const workPrinciples = [
   {
-    icon: '</>',
-    title: 'Build interactive work',
-    text: 'I care about interfaces that respond, move, and make people want to keep exploring.',
+    id: '01',
+    title: 'Figure out how it should feel',
+    summary: 'I start by prototyping and wireframing interaction. If something doesn’t feel clear, responsive, and intentional, I fix that before anything else.',
+    signals: ['Motion before polish', 'Latency noticable', 'Feels right > Looks right'],
   },
   {
-    icon: '◎',
-    title: 'Mix creative tools',
-    text: 'I like blending code with design, AI, music, 3D, motion, and whatever tool helps the idea hit harder.',
+    id: '02',
+    title: 'Make it actually work',
+    summary: 'I build the simplest version that proves the idea without overengineering. I include just enough structure to make it reliable and maintainable.',
+    signals: ['No premature abstraction', 'Make it work before making it perfect', 'Simple first, then scale'],
   },
   {
-    icon: '|||',
-    title: 'Make useful weird things',
-    text: 'The sweet spot is something practical enough to matter, but strange enough that it feels memorable.',
+    id: '03',
+    title: 'Refine with purpose',
+    summary: 'Finally, I polish and iterate. I add flair that serves the core experience and remains true to the product\'s personality.',
+    signals: ['Cut anything useless', 'Every detail earns its place', 'Performance is a feature'],
   },
 ]
-
 function VisualPlaceholder({ label, className }) {
   return (
     <div className={`relative grid overflow-hidden border border-white/10 bg-white/[0.012] ${className}`}>
@@ -234,27 +237,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section id="tools" className="border-b border-white/10 py-12">
+      <section id="tools" className="border-b border-white/10 py-12 max-md:py-7">
         <p className={sectionEyebrowClass}>TOOLS I USE</p>
 
-        <div className="grid grid-cols-4 gap-4 max-[1100px]:grid-cols-2 max-md:grid-cols-1">
+        <div className="grid grid-cols-4 gap-4 max-[1100px]:grid-cols-2 max-md:grid-cols-2 max-md:gap-2">
           {tools.map(({ name, Icon, fallback }, index) => (
             <article
-              key={name}
               ref={(element) => {
                 toolCardRefs.current[index] = element
               }}
-              className="group relative flex min-h-[170px] items-center justify-center overflow-visible border border-white/10 bg-white/[0.012] p-5 transition duration-300 hover:border-[#ff6a0057] hover:bg-[#ff6a000a]"
+              className="group relative flex min-h-[170px] items-center justify-center overflow-visible border border-white/10 bg-white/[0.012] p-5 transition duration-300 hover:border-[#ff6a0057] hover:bg-[#ff6a000a] max-md:min-h-[92px] max-md:p-2.5"
             >
               {Icon ? (
                 <Icon
-                  className="h-20 w-20 text-[#f5f1e8] transition-[color,transform,filter] duration-500 will-change-transform [transform-style:preserve-3d] group-hover:text-[#ff6a00] group-hover:[transform:perspective(700px)_rotateX(16deg)_rotateY(-18deg)_rotateZ(5deg)_scale(1.08)] group-hover:drop-shadow-[0_12px_20px_rgba(255,106,0,0.24)]"
+                  className="h-20 w-20 text-[#f5f1e8] transition-[color,transform,filter] duration-500 will-change-transform [transform-style:preserve-3d] group-hover:text-[#ff6a00] group-hover:[transform:perspective(700px)_rotateX(16deg)_rotateY(-18deg)_rotateZ(5deg)_scale(1.08)] group-hover:drop-shadow-[0_12px_20px_rgba(255,106,0,0.24)] max-md:h-10 max-md:w-10"
                   aria-hidden="true"
                 />
               ) : (
                 <LetterIcon className="group-hover:border-[#ff6a00] group-hover:text-[#ff6a00]">{fallback}</LetterIcon>
               )}
-              <p className="pointer-events-none absolute bottom-4 left-5 right-5 m-0 translate-y-1 text-left text-[0.95rem] uppercase leading-[1.5] text-[#f5f1e8d9] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+              <p className="pointer-events-none absolute bottom-4 left-5 right-5 m-0 translate-y-1 text-left text-[0.95rem] uppercase leading-[1.5] text-[#f5f1e8d9] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 max-md:bottom-2 max-md:left-2.5 max-md:right-2.5 max-md:translate-y-0 max-md:text-[0.56rem] max-md:leading-[1.3] max-md:opacity-100">
                 {name}
               </p>
             </article>
@@ -262,20 +264,42 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-white/10 py-12">
-        <p className={sectionEyebrowClass}>WHAT DRIVES ME</p>
+      <section className="border-b border-white/10 py-12 max-md:py-8">
+        <p className={sectionEyebrowClass}>HOW I WORK</p>
 
-        <div className="grid grid-cols-3 gap-8 max-[1100px]:grid-cols-1">
-          {motivations.map((item) => (
-            <article
-              key={item.title}
-              className="border-l border-white/10 pl-6 max-[1100px]:border-l-0 max-[1100px]:border-t max-[1100px]:pt-6 max-[1100px]:pl-0"
-            >
-              <p className="mb-4 text-[1.6rem] leading-none text-[#ff6a00]">{item.icon}</p>
-              <h2 className="mb-3 text-[1.18rem] font-semibold">{item.title}</h2>
-              <p className="m-0 max-w-[32ch] text-[1rem] leading-[1.9] text-[#f5f1e8b8]">{item.text}</p>
-            </article>
-          ))}
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-10 max-[1100px]:grid-cols-1 max-md:gap-6">
+          <div className="max-w-[40rem] text-left">
+            <h2 className="mb-4 font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-normal leading-[1.12]">
+              I care less about buzzwords and more about whether something feels
+              <AnimatedGradient className="text-[#ff6a00]">clear, responsive, and worth using twice.</AnimatedGradient>
+            </h2>
+            <p className="m-0 text-[1rem] leading-[1.9] text-[#f5f1e8b8]">
+              This is the framework I use when I build. If a decision doesn&apos;t improve feel, clarity, or reliability, I cut it.
+            </p>
+          </div>
+
+          <div className="grid gap-4 max-md:gap-3">
+            {workPrinciples.map((item) => (
+              <article key={item.id} className="border border-white/10 bg-white/[0.012] p-5 max-md:p-3.5">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="inline-flex min-w-10 items-center justify-center border border-[#ff6a004d] bg-[#ff6a001a] px-2 py-1 text-[0.7rem] uppercase tracking-[0.14em] text-[#ffb067]">
+                    {item.id}
+                  </span>
+                  <h3 className="m-0 text-[1.08rem] font-semibold">{item.title}</h3>
+                </div>
+
+                <p className="m-0 text-[0.98rem] leading-[1.85] text-[#f5f1e8bf]">{item.summary}</p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.signals.map((signal) => (
+                    <span key={signal} className="border border-white/10 bg-white/[0.02] px-2.5 py-1 text-[0.66rem] uppercase tracking-[0.12em] text-[#f5f1e8bf]">
+                      {signal}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -293,8 +317,9 @@ export default function AboutPage() {
           </Link>
         </div>
 
-        <VisualPlaceholder label="WORKFLOW / DESK / PROJECT IMAGE" className="min-h-[320px] max-md:min-h-[260px]" />
+        <PhysicsGrid rows={4} columns={4} gap={14} strength={0.002} radius={240} className="hidden md:block min-h-[320px] max-md:min-h-[260px]" />
       </section>
     </main>
   )
 }
+
