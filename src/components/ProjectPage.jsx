@@ -10,11 +10,34 @@ const imagePlaceholderClass =
 
 export default function ProjectPage() {
   const { id } = useParams()
-  const currentProject = projectsData[id] || projectsData['01']
+  const paramId = id ?? ''
+
+  // Try several fallbacks so URLs like /project/2 or /project/02 both resolve
+  const candidates = [paramId]
+  if (paramId && paramId.length === 1) candidates.push(paramId.padStart(2, '0'))
+  candidates.push(String(Number(paramId)))
+
+  let currentProject = null
+  for (const c of candidates) {
+    if (c && projectsData[c]) {
+      currentProject = projectsData[c]
+      break
+    }
+
+  }
+
+  if (!currentProject) {
+    // try to find by matching id values as a last resort
+    currentProject = Object.values(projectsData).find((p) => p.id === paramId || p.id === String(Number(paramId))) || projectsData['01']
+  }
+
   const otherProjects = Object.values(projectsData)
     .filter((project) => project.id !== currentProject.id)
     .slice(0, 2)
-
+  // Debugging: log which id was requested and which project was resolved
+  // Remove this after debugging
+  // eslint-disable-next-line no-console
+  console.log('[ProjectPage] paramId=', paramId, 'resolved=', currentProject?.id)
   return (
     <div className="w-full">
       <section className="mx-auto grid max-w-[1400px] grid-cols-2 items-center gap-12 border-b border-white/10 px-8 py-20 max-[1100px]:grid-cols-1 max-md:px-4 max-md:py-16">
@@ -72,8 +95,17 @@ export default function ProjectPage() {
             <div className="grid gap-6">
               {currentProject.details.map((detail) => (
                 <article key={detail.label} className={`${surfaceClass} p-6`}>
-                  <h3 className={`mb-3 block ${labelClass}`}>{detail.label}</h3>
-                  <p className="m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text}</p>
+                      <h3 className={`mb-3 block ${labelClass}`}>{detail.label}</h3>
+                      <p className="m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text}</p>
+                      {detail.text2 && (
+                        <p className="mt-4 m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text2}</p>
+                      )}
+                      {detail.text3 && (
+                        <p className="mt-4 m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text3}</p>
+                      )}
+                      {detail.text4 && (
+                        <p className="mt-4 m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text4}</p>
+                      )}
                 </article>
               ))}
             </div>

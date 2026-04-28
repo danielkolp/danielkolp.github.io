@@ -38,21 +38,24 @@ export const projectsData = {
       },
     ],
     details: [
+     {
+    label: 'Challenge',
+    text: "This was my first time working with Blender and building a 3D experience from scratch. I wanted to create an interactive browser-based 3D game, which meant learning how to import, rig, and animate character models while integrating them into a real-time Three.js environment.",
+    text2: "A key challenge was working with Mixamo animations and correctly converting them into reusable actions in Blender. This required properly structuring animation states and fixing orientation issues to avoid unnatural movement in-game.",
+    text3: "Another major hurdle was making the animations look good. At the project's current state, the movement is functional and feels responsive, but the animation quality is still a bit rough around the edges. Previously, there was a jump animation, however the jumping did not really sync well with the animation.",
+    text4: "I also had issues with the drawing mechanic, which is the absolute core of the experience. I pretty much had to figure out a way to make the drawing feel like you were actually painting something on the wall, which involved a lot of trial and error with how to get strokes to draw smoothly and responsively. In my first iteration, you would essentially draw one stroke, but you wouldn't see the stroke you were drawing until you finished the stroke, which made it feel really clunky and disconnected.",
+     },
       {
-        label: 'Challenge',
-        text: "Let me be a little clear: I've literally never worked with Blender before this project. The original project was to create something, and do a round of QA tests. However, I wanted to push it a little bit further and create something I've always wanted to make: a 3D game.",
-        text2: "This meant I had to have a little bit of fun with Blender. Essentially, I downloaded (royalty-free) 3D models. I then used Mixamo to rig grab animations for the player character. The main challenge was learning how to actually stash the animations as actions onto the model, and orient them correctly so that they don't make super unnatural movements.",
-      },
+  label: 'Solution',
+  text: "I essentially had to learn how to use Blender on the fly, which involved a lot of trial and error. I started by downloading a royalty-free simple character model and rigging it with a basic skeleton. Then I imported Mixamo animations and worked on converting them into reusable actions within Blender. This process involved fixing orientation issues and structuring the animation states in a way that would allow for smooth transitions between movements.",
+  text2: "There were a lot of tweaks and fine-tuning that I had to do that AI simply couldn't help with, especially when it came to making animations look and feel good. This includes things like adjusting player speed based on the speed of the walk cycle, or making sure that when the character turns, the model doesn't do a full 360 degree spin before facing the new direction. A lot of small details like that really made a big difference in how the movement felt overall. Like in user experience design, when you immerse yourself in a game, you don't notice when something is done right. However, if something is off, you will immediately notice it and it can really harm the experience.",
+  text3: "For the stroke issue, I ended up implementing a system where it would preview the stroke as you were drawing it, and bake it onto the wall as soon as you finished the stroke. This made drawing feel a million times more responsive and satisfying."
+},
       {
-        label: 'Solution',
-        text: 'So yes, there were many problems that occurred during development. I was frustrated at Blender (as you would expect), there were major performance issues that needed to be fixed, and the hardest part: UX decisions.',
-        text2: "How do you make a 3D game actually feel not miserable to play? The thing is, at least for me, when I play a 3D video game and something unnatural happens with physics, movement, or controls, it breaks immersion and makes the game feel bad. Although my controls aren't perfect, I'm not exactly a triple AAA game studio, so I guess I had to make a few compromises.",
-        text3: "But at the end of the day, I think the project turned out pretty well, considering this was my first ever attempt at making something like this. It was fun to dip my toes into Blender and see what Three.js can do with a little bit of creativity."
-      },
-      {
-        label: 'Result',
-        text: "The result is an awesome, slightly buggy 3D game in which you can draw on walls. Multiplayer has been implemented, but I don't really have the resources to host a backend server for it. The game has a bit of an initial lag spike, but for the most part, it runs pretty smoothly. It's been a fun experiment and a great learning experience, and I'm excited to see where I can take it next.",
-      },
+  label: 'Result',
+  text: "The result is a fully interactive browser-based 3D experience where users can move through an environment and draw directly onto surfaces in real time. The project demonstrates real-time rendering, animation handling, and interactive design using Three.js.",
+  text2: "Multiplayer support was explored, and while not fully deployed due to infrastructure constraints, the foundation is in place. Overall, the project successfully translates a complex 3D concept into a performant and engaging web-based experience."
+},
     ],
   },
   '02': {
@@ -79,7 +82,7 @@ export const projectsData = {
 },
 {
   label: 'Challenge',
-  text: 'The hardest problem wasn’t finding underground tracks, it was filtering out the noise. Initially, the algorithm was picking up on YouTube shorts and Minecraft Lets Play videos, so I had to figure out how to actually filter them out. Then I realized remembered the \'topic\' feature on YouTube, which are auto-generated channels that host official audio releases with clean metadata. They essentially act like a structured music layer inside YouTube, which made them a strong signal for real tracks.',
+  text: 'The hardest problem wasn’t finding underground tracks, it was filtering out the noise. Initially, the algorithm was picking up on YouTube shorts and Minecraft Lets Play videos, so I had to figure out how to actually filter them out. Then I remembered the \'topic\' feature on YouTube, which are auto-generated channels that host official audio releases with clean metadata. They essentially act like a structured music layer inside YouTube, which made them a strong signal for real tracks.',
 },
 {
   label: 'Solution',
