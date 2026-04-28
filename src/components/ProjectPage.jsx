@@ -34,10 +34,7 @@ export default function ProjectPage() {
   const otherProjects = Object.values(projectsData)
     .filter((project) => project.id !== currentProject.id)
     .slice(0, 2)
-  // Debugging: log which id was requested and which project was resolved
-  // Remove this after debugging
-  // eslint-disable-next-line no-console
-  console.log('[ProjectPage] paramId=', paramId, 'resolved=', currentProject?.id)
+
   return (
     <div className="w-full">
       <section className="mx-auto grid max-w-[1400px] grid-cols-2 items-center gap-12 border-b border-white/10 px-8 py-20 max-[1100px]:grid-cols-1 max-md:px-4 max-md:py-16">

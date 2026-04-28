@@ -13,7 +13,7 @@ export const projectsData = {
     id: '01',
     title: 'Graffiti Game',
     subtitle: 'A 3D graffiti game built with Three.js. Creative name pending.',
-    description: 'A 3D graffiti game built with React Three Fiber. Explore, tag and leave your mark.',
+    description: 'A 3D graffiti game built with Three.js. Creative name pending.',
     fullDescription: 'Graffiti Game is an interactive 3D experience that lets you explore a virtual city and create graffiti art. Built with Three.js, this project demonstrates advanced 3D rendering techniques and creative coding.',
     overviewParagraphs: [
       'Graffiti Game started as a test for how far a browser-based 3D interface could go before it stopped feeling playful. The goal was to make the interaction feel physical, like you were moving through a space instead of clicking through a demo.',
