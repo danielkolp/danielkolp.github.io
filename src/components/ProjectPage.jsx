@@ -1,5 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { projectsData } from '../data/projects'
+import { MdConstruction } from 'react-icons/md'
+import Grainient from './Granient'
 
 const labelClass = 'text-[0.74rem] uppercase tracking-[0.16em] text-[#f5f1e8b8]'
 const surfaceClass = 'border border-white/10 bg-white/[0.015]'
@@ -98,6 +100,16 @@ export default function ProjectPage() {
                   )
                 }
 
+                // Support image items as either a string (imported URL) or an object { type: 'image', src }
+                const src = typeof item === 'string' ? item : item?.src
+                if (src) {
+                  return (
+                    <div key={`gallery-${index}`} className="min-h-[220px] overflow-hidden border border-white/10 bg-black max-md:min-h-[260px]">
+                      <img src={src} alt={`${currentProject.title} gallery ${index + 1}`} className="h-full w-full object-cover" />
+                    </div>
+                  )
+                }
+
                 return (
                   <div
                     key={`gallery-${index}`}
@@ -146,17 +158,67 @@ export default function ProjectPage() {
         <h2 className="mb-8 text-[0.76rem] uppercase tracking-[0.18em] text-[#f5f1e8b8]">MORE PROJECTS</h2>
 
         <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
-          {otherProjects.map((project) => (
-            <Link key={project.id} to={`/project/${project.id}`} className="group">
-              <article className="h-full border border-white/10 bg-white/[0.015] p-6 transition duration-200 hover:-translate-y-0.5 hover:border-[#ff6a0057] hover:bg-[#ff6a000d]">
-                <div className="mb-5 grid min-h-[220px] place-items-center border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.12),rgba(255,255,255,0.02)_68%)] font-serif text-[2rem] text-[#f5f1e8b8]">
-                  {project.id}
+          {otherProjects.map((project) => {
+            const isUnderConstruction = project.underConstruction === true
+
+            if (isUnderConstruction) {
+              return (
+                <div key={project.id} className="group">
+                  <article className="relative isolate flex h-full min-h-[220px] overflow-hidden border border-white/10 bg-white/[0.012] transition duration-200 hover:-translate-y-0.5 hover:border-[#ff6a0057] hover:bg-[#ff6a000d] hover:shadow-[0_16px_34px_rgba(0,0,0,0.18),0_0_28px_rgba(255,106,0,0.08)]">
+                    <div className="absolute inset-0 overflow-hidden">
+                      <Grainient
+                        color1="#ff6a00"
+                        color2="#00b7ff"
+                        color3="#f5f1e8"
+                        timeSpeed={0.2}
+                        warpStrength={1}
+                        warpFrequency={4.1}
+                        warpSpeed={1.55}
+                        warpAmplitude={46}
+                        blendAngle={-10}
+                        blendSoftness={0.08}
+                        rotationAmount={300}
+                        noiseScale={2}
+                        grainAmount={0.08}
+                        grainScale={2}
+                        grainAnimated={false}
+                        contrast={1.34}
+                        gamma={1}
+                        saturation={1.42}
+                        centerX={0}
+                        centerY={0}
+                        zoom={0.93}
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.12)_0%,rgba(10,10,10,0.52)_46%,rgba(10,10,10,0.9)_100%)] transition duration-200 group-hover:bg-[linear-gradient(180deg,rgba(10,10,10,0.02)_0%,rgba(10,10,10,0.36)_42%,rgba(10,10,10,0.84)_100%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,241,232,0.12),transparent_36%)]" />
+                    <div className="relative z-10 flex min-h-full w-full flex-col items-center justify-center gap-4 text-center p-6">
+                      <MdConstruction className="h-16 w-16 text-[#f5f1e8] transition duration-200 group-hover:text-[#ff6a00]" aria-hidden="true" />
+                      <p className="m-0 text-[0.78rem] uppercase tracking-[0.18em] text-[#f5f1e8d9] opacity-0 transition duration-200 group-hover:opacity-100">
+                        Under construction
+                      </p>
+                    </div>
+                  </article>
                 </div>
-                <h3 className="mb-3 font-serif text-[1.8rem] font-normal leading-[1.1]">{project.title}</h3>
-                <p className="m-0 text-[#f5f1e8b8] leading-[1.75]">{project.description}</p>
-              </article>
-            </Link>
-          ))}
+              )
+            }
+
+            return (
+              <Link key={project.id} to={`/project/${project.id}`} className="group">
+                <article className="h-full border border-white/10 bg-white/[0.015] p-6 transition duration-200 hover:-translate-y-0.5 hover:border-[#ff6a0057] hover:bg-[#ff6a000d]">
+                  <div className="mb-5 grid min-h-[220px] place-items-center border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.12),rgba(255,255,255,0.02)_68%)] font-serif text-[2rem] text-[#f5f1e8b8]">
+                    {project.image ? (
+                      <img src={project.image} alt={`${project.title} preview`} className="h-full w-full object-cover" />
+                    ) : (
+                      project.id
+                    )}
+                  </div>
+                  <h3 className="mb-3 font-serif text-[1.8rem] font-normal leading-[1.1]">{project.title}</h3>
+                  <p className="m-0 text-[#f5f1e8b8] leading-[1.75]">{project.description}</p>
+                </article>
+              </Link>
+            )
+          })}
         </div>
       </section>
     </div>

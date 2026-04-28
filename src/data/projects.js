@@ -4,6 +4,9 @@ import graffitiGame1 from '../assets/images/graffiti.png'
 import projectImage from '../assets/images/image.png'
 import cratesImage from '../assets/images/crates.png'
 import cratesDetailImage from '../assets/images/cratesdetail.png'
+import cratesImg1 from '../assets/images/cratesgallery/cratesimg1.png'
+import cratesImg2 from '../assets/images/cratesgallery/cratesimg2.png'
+import cratesImg3 from '../assets/images/cratesgallery/cratesimg3.png'
 
 export const projectsData = {
   '01': {
@@ -68,7 +71,7 @@ export const projectsData = {
     link: 'https://danielkolp.github.io/crates',
     image: cratesImage,
     detailImage: cratesDetailImage,
-    gallery: [null, null, null],
+    gallery: [cratesImg1, cratesImg2, cratesImg3],
     details: [
      {
   label: 'Overview',
@@ -76,15 +79,15 @@ export const projectsData = {
 },
 {
   label: 'Challenge',
-  text: 'The hardest problem wasn’t finding underground tracks — it was filtering out the noise. Low play counts alone aren’t enough; they often lead to low-quality content. The real challenge was identifying which tracks actually matter before the algorithmic mainstream picks them up.',
+  text: 'The hardest problem wasn’t finding underground tracks, it was filtering out the noise. Initially, the algorithm was picking up on YouTube shorts and Minecraft Lets Play videos, so I had to figure out how to actually filter them out. Then I realized remembered the \'topic\' feature on YouTube, which are auto-generated channels that host official audio releases with clean metadata. They essentially act like a structured music layer inside YouTube, which made them a strong signal for real tracks.',
 },
 {
   label: 'Solution',
-  text: 'Crates solves this using a ranking model built around three core signals: engagement velocity, repeat interest, and rarity. Combined, these signals prioritize tracks that aren’t just unknown — they’re about to matter.',
+ text: 'Crates uses YouTube Topic channels as a high-signal layer to filter out Shorts, gaming content, and other non-music noise. From there, it ranks tracks using engagement metrics like view-to-like ratio and comment activity, prioritizing under-the-radar uploads that show strong listener interest despite low exposure.'
 },
 {
   label: 'Result',
-  text: 'The result is a discovery experience that feels like digging through a perfectly curated record bin. Instead of scrolling endlessly, users consistently find tracks that feel fresh, early, and genuinely worth saving.',
+  text: 'The result is a discovery experience that feels like digging through a curated record bin. Instead of endless scrolling, users consistently uncover early, high-quality tracks that feel fresh and worth saving. Essentially as if you\'re digging through crates in the back of a record store and finding that one gem that hasn\'t been discovered yet. Although the algorithm isn\'t perfect, it does a decent job of finding music that feels fresh and underground. It uses a neat Tinder-like swiping interface that makes it easy to quickly save tracks you like and discard ones you don\'t.',
 },
     ],
   },
@@ -103,6 +106,7 @@ export const projectsData = {
     role: 'Full Stack Developer',
     link: '#',
     image: null,
+    underConstruction: true,
     detailImage: null,
     gallery: [null, null, null],
     details: [
