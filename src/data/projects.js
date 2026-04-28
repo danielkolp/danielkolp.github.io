@@ -1,6 +1,7 @@
 import blenderDemo from '../assets/video/blenderdemo.mp4'
 import blenderDemo2 from '../assets/video/blenderdemo2.mp4'
-import graffitiGame1 from '../assets/images/graffiti.png'
+import graffitiGame1 from '../assets/images/graffitigamenew1.png'
+import graffitiGame2 from '../assets/images/graffitigamenew2.png'
 import projectImage from '../assets/images/image.png'
 import cratesImage from '../assets/images/crates.png'
 import cratesDetailImage from '../assets/images/cratesdetail.png'
@@ -17,7 +18,7 @@ export const projectsData = {
     fullDescription: 'Graffiti Game is an interactive 3D experience that lets you explore a virtual city and create graffiti art. Built with Three.js, this project demonstrates advanced 3D rendering techniques and creative coding.',
     overviewParagraphs: [
       'Graffiti Game started as a test for how far a browser-based 3D interface could go before it stopped feeling playful. The goal was to make the interaction feel physical, like you were moving through a space instead of clicking through a demo.',
-      'The visual language balances grit and precision: slight post-processing, responsive motion, and a UI that stays quiet while the work does the talking.',
+      'The idea was to make a game with a simple environment, simple mechanics, with some social shenanigans thrown in. Basically "walk around and do dumb stuff with random people".',
     ],
     technologies: ['THREE.JS', 'WEBGL', 'JAVASCRIPT', 'VITE', 'BLENDER'],
     year: '2025',
@@ -36,6 +37,16 @@ export const projectsData = {
         src: blenderDemo2,
         title: 'Graffiti Game Blender Demo 2',
       },
+      {
+        type: 'image',
+        src: graffitiGame1,
+        title: 'Graffiti Game In-Game Screenshot',
+      },
+      {
+        type: 'image',
+        src: graffitiGame2,
+        title: 'Graffiti Game In-Game Screenshot',
+      }
     ],
     details: [
      {
@@ -44,17 +55,20 @@ export const projectsData = {
     text2: "A key challenge was working with Mixamo animations and correctly converting them into reusable actions in Blender. This required properly structuring animation states and fixing orientation issues to avoid unnatural movement in-game.",
     text3: "Another major hurdle was making the animations look good. At the project's current state, the movement is functional and feels responsive, but the animation quality is still a bit rough around the edges. Previously, there was a jump animation, however the jumping did not really sync well with the animation.",
     text4: "I also had issues with the drawing mechanic, which is the absolute core of the experience. I pretty much had to figure out a way to make the drawing feel like you were actually painting something on the wall, which involved a lot of trial and error with how to get strokes to draw smoothly and responsively. In my first iteration, you would essentially draw one stroke, but you wouldn't see the stroke you were drawing until you finished the stroke, which made it feel really clunky and disconnected.",
+    text5: "And then came multiplayer. Conveniently, there is this service named Render that allows you to deploy deploy backends that wipe state after a certain amount of time. This is perfect for a game like this. Because on one hand, graffiti's would be wiped after a certain amount of time, just like in the real world. On the other hand, it also allows for multiplayer support. Obviously, adding multiplayer was a huge challenge for me, as I had to mess around with plugins such as socket.io and figure out how to sync state across clients in real time."
      },
       {
   label: 'Solution',
   text: "I essentially had to learn how to use Blender on the fly, which involved a lot of trial and error. I started by downloading a royalty-free simple character model and rigging it with a basic skeleton. Then I imported Mixamo animations and worked on converting them into reusable actions within Blender. This process involved fixing orientation issues and structuring the animation states in a way that would allow for smooth transitions between movements.",
   text2: "There were a lot of tweaks and fine-tuning that I had to do that AI simply couldn't help with, especially when it came to making animations look and feel good. This includes things like adjusting player speed based on the speed of the walk cycle, or making sure that when the character turns, the model doesn't do a full 360 degree spin before facing the new direction. A lot of small details like that really made a big difference in how the movement felt overall. Like in user experience design, when you immerse yourself in a game, you don't notice when something is done right. However, if something is off, you will immediately notice it and it can really harm the experience.",
-  text3: "For the stroke issue, I ended up implementing a system where it would preview the stroke as you were drawing it, and bake it onto the wall as soon as you finished the stroke. This made drawing feel a million times more responsive and satisfying."
+  text3: "For the stroke issue, I ended up implementing a system where it would preview the stroke as you were drawing it, and bake it onto the wall as soon as you finished the stroke. This made drawing feel a million times more responsive and satisfying.",
+  text4: "With the help of Render and some time spent with Codex, I was able to set up something pretty sophisticated. Drawing and movement live-sync across clients in real time, and then came a chat feature that allows you to chat with other players in the game. The chat is pretty basic, but it was a fun addition that made the world feel more alive and interactive."
 },
       {
   label: 'Result',
   text: "The result is a fully interactive browser-based 3D experience where users can move through an environment and draw directly onto surfaces in real time. The project demonstrates real-time rendering, animation handling, and interactive design using Three.js.",
-  text2: "Multiplayer support was explored, and while not fully deployed due to infrastructure constraints, the foundation is in place. Overall, the project successfully translates a complex 3D concept into a performant and engaging web-based experience."
+  text2: "Multiplayer support allows users to see each other's drawings, movements, and chat in real time, creating a shared creative space.",
+  text3: "This project was inspired platforms such as Roblox or many of those social games where the fun comes from what the players do and not from the game itself."
 },
     ],
   },

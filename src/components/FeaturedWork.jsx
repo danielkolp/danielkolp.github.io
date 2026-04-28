@@ -127,8 +127,8 @@ export default function FeaturedWork() {
       id: '01',
       featured: true,
       title: 'Graffiti Game',
-      description: 'A 3D drawing game built with React Three Fiber.',
-      technologies: ['REACT', 'THREE.JS', 'WEBGL'],
+      description: 'A multiplayer 3D drawing game built with Three.js.',
+      technologies: ['REACT', 'THREE.JS', 'WEBGL', 'BLENDER', 'SOCKET.IO'],
       image: graffitiGame1,
     },
     {
