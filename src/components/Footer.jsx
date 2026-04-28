@@ -15,12 +15,12 @@ export default function Footer() {
             </span>{' '}
             idea? Let&apos;s build it.
           </h2>
-          <a href="mailto:contact@example.com" className={ctaButtonClass}>
+          <a href="mailto:danielkolpakov00@gmail.com" className={ctaButtonClass}>
             LET&apos;S CONNECT -&gt;
           </a>
         </div>
 
-        <div className="mb-8 grid grid-cols-[1.1fr_0.7fr_1fr] gap-12 max-[1100px]:grid-cols-1">
+        <div className="mb-8 grid grid-cols-1 gap-12">
           <div className="text-left">
             <p className="mb-3 text-[0.74rem] uppercase tracking-[0.16em] text-[#f5f1e8b8]">NAVIGATE</p>
             <Link to="/" className="mb-3 inline-block font-serif text-[2rem] tracking-[0.08em]">
@@ -33,71 +33,8 @@ export default function Footer() {
               <li><Link to="/#work" className="transition-colors duration-200 hover:text-[#f5f1e8]">Work</Link></li>
               <li><Link to="/about" className="transition-colors duration-200 hover:text-[#f5f1e8]">About</Link></li>
               <li><Link to="/#experiments" className="transition-colors duration-200 hover:text-[#f5f1e8]">Experiments</Link></li>
-              {/* Journal and Tools links removed from footer navigation */}
               <li><Link to="/#contact" className="transition-colors duration-200 hover:text-[#f5f1e8]">Contact</Link></li>
             </ul>
-          </div>
-
-          <div className="text-left">
-            <p className="mb-3 text-[0.74rem] uppercase tracking-[0.16em] text-[#f5f1e8b8]">CONNECT</p>
-            <ul className="m-0 flex list-none gap-4 p-0">
-              <li>
-                <a
-                  href="#"
-                  title="GitHub"
-                  className="inline-flex h-[42px] w-[42px] items-center justify-center border border-white/10 text-[#f5f1e8b8] transition duration-200 hover:border-[#ff6a0057] hover:bg-[#ff6a000f] hover:text-[#f5f1e8]"
-                >
-                  GH
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  title="LinkedIn"
-                  className="inline-flex h-[42px] w-[42px] items-center justify-center border border-white/10 text-[#f5f1e8b8] transition duration-200 hover:border-[#ff6a0057] hover:bg-[#ff6a000f] hover:text-[#f5f1e8]"
-                >
-                  in
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  title="X"
-                  className="inline-flex h-[42px] w-[42px] items-center justify-center border border-white/10 text-[#f5f1e8b8] transition duration-200 hover:border-[#ff6a0057] hover:bg-[#ff6a000f] hover:text-[#f5f1e8]"
-                >
-                  X
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  title="Email"
-                  className="inline-flex h-[42px] w-[42px] items-center justify-center border border-white/10 text-[#f5f1e8b8] transition duration-200 hover:border-[#ff6a0057] hover:bg-[#ff6a000f] hover:text-[#f5f1e8]"
-                >
-                  @
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="text-left">
-            <p className="mb-3 text-[0.74rem] uppercase tracking-[0.16em] text-[#f5f1e8b8]">STAY IN THE LOOP</p>
-            <div className="mb-4 flex gap-2">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="min-w-0 flex-1 border border-white/10 bg-white/[0.02] px-4 py-3 text-[#f5f1e8] placeholder:text-[#f5f1e8b8] focus:border-[#ff6a0080] focus:outline-none"
-              />
-              <button
-                type="button"
-                className="border border-white/10 bg-transparent px-4 py-3 text-[#f5f1e8] transition duration-200 hover:border-[#ff6a0057] hover:bg-[#ff6a000f]"
-              >
-                -&gt;
-              </button>
-            </div>
-            <p className="m-0 text-[#f5f1e8b8] leading-[1.8]">
-              Thoughts on code, design, AI and whatever I&apos;m currently obsessed with.
-            </p>
           </div>
         </div>
 

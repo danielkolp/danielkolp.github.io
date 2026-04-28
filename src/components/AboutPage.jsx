@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import danielPortrait from '../assets/images/daniel2.jpg'
+import AnimatedGradient from './AnimatedGradient'
 import {
   SiFigma,
   SiGithub,
@@ -11,6 +13,22 @@ import {
   SiThreedotjs,
   SiVite,
 } from 'react-icons/si'
+import { TbBrandAdobeIllustrator, TbBrandAdobePhotoshop } from 'react-icons/tb'
+
+function AbletonIcon({ className = '', ...rest }) {
+  return (
+    <svg
+      className={`h-20 w-20 ${className}`}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      {...rest}
+    >
+      <path d="M0 6.4v11.2h1.6V6.4zm3.2 0v11.2h1.6V6.4zm3.2 0v11.2H8V6.4zm3.2 0v11.2h1.6V6.4zm3.2 0V8H24V6.4zm0 3.2v1.6H24V9.6zm0 3.2v1.6H24v-1.6zm0 3.2v1.6H24V16z" />
+    </svg>
+  )
+}
 
 const sectionEyebrowClass = 'mb-4 text-[0.74rem] uppercase tracking-[0.16em] text-[#f5f1e8b8]'
 
@@ -28,37 +46,11 @@ function LetterIcon({ children, className = '' }) {
   )
 }
 
-const approachSteps = [
-  {
-    number: '01',
-    title: 'Find the weird angle',
-    text: 'I start by looking for the part of an idea that actually feels interesting, not just the obvious website version of it.',
-  },
-  {
-    number: '02',
-    title: 'Prototype fast',
-    text: 'I like getting something on screen quickly, then breaking it, fixing it, and pushing it until the interaction feels right.',
-  },
-  {
-    number: '03',
-    title: 'Make it usable',
-    text: 'The idea can be experimental, but the experience still needs structure, clarity, and a reason for every detail.',
-  },
-  {
-    number: '04',
-    title: 'Add motion',
-    text: 'GSAP, WebGL, audio, hover states, transitions — the polish is what makes the work feel alive instead of flat.',
-  },
-  {
-    number: '05',
-    title: 'Ship and improve',
-    text: 'I would rather ship a sharp version, learn from it, and keep evolving than endlessly tweak something nobody sees.',
-  },
-]
+
 
 const aboutMeParagraphs = [
   "I enjoy building things that feel alive, but I care just as much about the fundamentals that make an experience reliable. For me, creative work still needs structure, clarity, and purpose in every decision.",
-  "I'm studying New Media Design and Web Development at BCIT, and I spend a lot of time experimenting with motion, 3D systems, and AI-driven tools. That blend of technical depth and visual thinking is where I do my best work.",
+  "I studied New Media Design and Web Development at BCIT, and I spend a lot of time experimenting with motion, 3D systems, and AI-driven tools. That blend of technical depth and visual thinking is where I do my best work.",
   "Long term, I want to build products that are both useful and expressive. I care about collaborating with people who take craft seriously, move quickly, and build things that genuinely solve problems.",
 ]
 
@@ -72,9 +64,9 @@ const tools = [
   { name: 'Figma', Icon: SiFigma },
   { name: 'GitHub', Icon: SiGithub },
   { name: 'Vite', Icon: SiVite },
-  { name: 'Illustrator', fallback: 'Ai' },
-  { name: 'After Effects', fallback: 'Ae' },
-  { name: 'Dimension', fallback: 'Dn' },
+  { name: 'Illustrator', Icon: TbBrandAdobeIllustrator },
+  { name: 'Ableton Live 12 Suite', Icon: AbletonIcon },
+  { name: 'Photoshop', Icon: TbBrandAdobePhotoshop },
 ]
 
 const motivations = [
@@ -176,7 +168,7 @@ export default function AboutPage() {
             <br />
             Designer.
             <br />
-            Always <span className="italic text-[#ff6a00]">building</span>.
+            Always <AnimatedGradient className="italic text-[#ff6a00]">building</AnimatedGradient>.
           </h1>
 
           <p className="mb-8 max-w-[38rem] text-[1.05rem] leading-[1.9] text-[#f5f1e8b8]">
@@ -189,7 +181,14 @@ export default function AboutPage() {
           </Link>
         </div>
 
-        <VisualPlaceholder label="PORTRAIT / PROJECT VISUAL" className="min-h-[360px] max-md:min-h-[280px]" />
+        <div className="relative min-h-[360px] overflow-hidden border border-white/10 bg-white/[0.012] max-md:min-h-[280px]">
+          <img
+            src={danielPortrait}
+            alt="Daniel portrait"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,106,0,0.12),transparent_28%),radial-gradient(circle_at_80%_75%,rgba(0,183,255,0.08),transparent_30%)]" />
+        </div>
       </section>
 
       <section className="grid grid-cols-2 gap-14 border-b border-white/10 py-12 max-[1100px]:grid-cols-1">
@@ -284,9 +283,9 @@ export default function AboutPage() {
         <div className="text-left">
           <p className={sectionEyebrowClass}>CURRENTLY</p>
 
-          <h2 className="mb-7 max-w-[20ch] font-serif text-[clamp(2.2rem,4vw,3.5rem)] font-normal leading-[1.08]">
-            I&apos;m building toward a career where I can mix{' '}
-            <span className="text-[#ff6a00]">creative coding, AI, music, and useful web tools.</span>
+          <h2 className="mb-7 max-w-[44ch] font-serif text-[clamp(2.2rem,4vw,3.5rem)] font-normal leading-[1.08]">
+            I&apos;m building toward a career where I can mix
+            <AnimatedGradient className="text-[#ff6a00]">creative coding, AI, music, and useful web tools.</AnimatedGradient>
           </h2>
 
           <Link to="/#work" className={actionLinkClass}>

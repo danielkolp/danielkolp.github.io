@@ -49,8 +49,8 @@ export default function Hero() {
           <a href="#work" className={primaryButtonClass}>
             VIEW MY WORK -&gt;
           </a>
-          <a href="#experiments" className={secondaryButtonClass}>
-            PLAY SOMETHING -&gt;
+          <a href="mailto:danielkolpakov00@gmail.com" className={secondaryButtonClass}>
+            contact
           </a>
         </div>
       </div>

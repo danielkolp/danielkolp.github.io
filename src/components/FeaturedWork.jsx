@@ -1,16 +1,10 @@
 import { Link } from 'react-router-dom'
+import { MdConstruction } from 'react-icons/md'
 import Grainient from './Granient'
 import graffitiGame1 from '../assets/images/graffitigame1.png'
 import cratesImage from '../assets/images/crates.png'
 const actionLinkClass =
   'relative inline-flex w-fit items-center gap-2 pb-1 text-[0.78rem] uppercase tracking-[0.14em] text-[#f5f1e8] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-[0.2] after:bg-[linear-gradient(90deg,#ff6a00,#00b7ff)] after:transition-transform after:duration-200 hover:after:scale-x-100'
-
-const gradientById = {
-  '01': { color1: '#ff7a00', color2: '#0a84ff', color3: '#ff9d00' },
-  '02': { color1: '#ff6a00', color2: '#0a84ff', color3: '#ff8b00' },
-  '03': { color1: '#ff8b00', color2: '#00b7ff', color3: '#ff6a00' },
-  '04': { color1: '#ff7b00', color2: '#16e0a1', color3: '#0ea5ff' },
-}
 
 const bentoSizeById = {
   '01': 'md:col-span-2 lg:col-span-2 lg:row-span-2 lg:min-h-[560px]',
@@ -22,8 +16,53 @@ const bentoSizeById = {
 const cardClass =
   'group relative isolate flex min-h-[250px] overflow-hidden border border-white/10 bg-white/[0.012] p-6 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[#ff6a0057] hover:bg-[#ff6a000d] hover:shadow-[0_16px_34px_rgba(0,0,0,0.18),0_0_28px_rgba(255,106,0,0.08)] lg:p-8'
 
+const constructionCardClass =
+  'group relative isolate flex min-h-[250px] overflow-hidden border border-white/10 bg-white/[0.012] p-6 transition duration-200 hover:-translate-y-0.5 hover:border-[#ff6a0057] hover:bg-[#ff6a000d] hover:shadow-[0_16px_34px_rgba(0,0,0,0.18),0_0_28px_rgba(255,106,0,0.08)] lg:p-8'
+
 function BentoProjectCard({ project, featured = false }) {
-  const palette = gradientById[project.id] ?? gradientById['03']
+  const isUnderConstruction = project.underConstruction === true
+
+  if (isUnderConstruction) {
+    return (
+      <div className={`${constructionCardClass} ${bentoSizeById[project.id] ?? ''}`} aria-label="Under construction">
+        <div className="absolute inset-0">
+          <Grainient
+          color1="#ff6a00"
+          color2="#00b7ff"
+          color3="#f5f1e8"
+            timeSpeed={0.2}
+            warpStrength={1}
+            warpFrequency={4.1}
+            warpSpeed={1.55}
+            warpAmplitude={46}
+            blendAngle={-10}
+            blendSoftness={0.08}
+            rotationAmount={300}
+            noiseScale={2}
+            grainAmount={0.08}
+            grainScale={2}
+            grainAnimated={false}
+            contrast={1.34}
+            gamma={1}
+            saturation={1.42}
+            centerX={0}
+            centerY={0}
+            zoom={0.93}
+          />
+        </div>
+
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.12)_0%,rgba(10,10,10,0.52)_46%,rgba(10,10,10,0.9)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,241,232,0.12),transparent_36%)]" />
+
+        <div className="relative z-10 flex min-h-full w-full flex-col items-center justify-center gap-4 text-center">
+          <MdConstruction className="h-16 w-16 text-[#f5f1e8] transition duration-200 group-hover:text-[#ff6a00]" aria-hidden="true" />
+          <p className="m-0 text-[0.78rem] uppercase tracking-[0.18em] text-[#f5f1e8d9] opacity-0 transition duration-200 group-hover:opacity-100">
+            Under construction
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <Link to={`/project/${project.id}`} className={`${cardClass} ${bentoSizeById[project.id] ?? ''}`}>
@@ -32,9 +71,6 @@ function BentoProjectCard({ project, featured = false }) {
           <img src={project.image} alt={`${project.title} preview`} className="h-full w-full object-cover" />
         ) : (
           <Grainient
-            color1={palette.color1}
-            color2={palette.color2}
-            color3={palette.color3}
             timeSpeed={featured ? 0.2 : 0.22}
             warpStrength={1}
             warpFrequency={featured ? 3.9 : 4.2}
@@ -107,12 +143,14 @@ export default function FeaturedWork() {
       title: 'Prompt Lab',
       description: 'AI prompt generator for faster, better results.',
       technologies: ['REACT', 'NEXT.JS'],
+      underConstruction: true,
     },
     {
       id: '04',
       title: 'Frame Shift',
       description: 'Interactive motion experiments for web storytelling.',
       technologies: ['GSAP', 'WEBGL'],
+      underConstruction: true,
     },
   ]
 
