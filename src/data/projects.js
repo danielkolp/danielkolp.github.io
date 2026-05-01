@@ -92,19 +92,23 @@ export const projectsData = {
     details: [
      {
   label: 'Overview',
-  text: 'Music discovery shouldn’t feel like digging through garbage to find one good track. Crates turns that process into something intentional. Instead of sending users down endless YouTube or SoundCloud rabbit holes, it actively pulls them deeper into high-quality underground music. The app analyzes signals like engagement velocity, repeat interest, and rarity to surface tracks that are gaining momentum before they break out.',
+  text: 'Music discovery shouldn’t feel like digging through garbage to find one good track. I always listen to underground tracks that I find on Soundcloud. The problem is, their discovery system is bad. For example, a house track on soundcloud can be mellow and chill, but all their algorithm knows about you is that you listened to a House track, so it would also recommend house tracks that are the exact opposite of what you like, as well as songs that are well-known and popular. Crates is built to give you the whole shaabang. It uses YouTube data to surface tracks that are underground using simple filters, and allows you to use more specific filters to find tracks that are similar to what you like.',
 },
 {
   label: 'Challenge',
-  text: 'The hardest problem wasn’t finding underground tracks, it was filtering out the noise. Initially, the algorithm was picking up on YouTube shorts and Minecraft Lets Play videos, so I had to figure out how to actually filter them out. Then I remembered the \'topic\' feature on YouTube, which are auto-generated channels that host official audio releases with clean metadata. They essentially act like a structured music layer inside YouTube, which made them a strong signal for real tracks.',
+  text: 'The hardest problem wasn’t finding underground tracks, it was filtering out junk and non music related content. Initially, the algorithm was picking up on YouTube shorts and Minecraft Lets Play videos, so I had to figure out how to actually filter them out. Then I remembered the \'topic\' feature on YouTube, which are auto-generated channels that host official audio releases with clean metadata. They essentially act like a structured music layer inside YouTube, which made them a strong signal for real tracks.',
+  text2: 'Another problem was that balancing the gem score system. What is the difference between a track with a high gem score and a low gem score?'
+  
 },
 {
   label: 'Solution',
- text: 'Crates uses YouTube Topic channels as a high-signal layer to filter out Shorts, gaming content, and other non-music noise. From there, it ranks tracks using engagement metrics like view-to-like ratio and comment activity, prioritizing under-the-radar uploads that show strong listener interest despite low exposure.'
+  text: 'I initially had the plan to  use the SoundCloud API, but I quickly realized that their API is gated to users who have an Artist Pro plan. I already have a Go+ subscription, so I didn\'t really want to pay extra just to get access to the API. So I switched to YouTube. Completely free, with limits that are pretty generous.',
+ text2: 'Crates uses Youtube Topic channels as a strong quality signal. Filtering for topic-only channels got rid of a lot of junk and non-music content. Every track also has metadata that gives the algorithm more to work with, such as views, likes, comments, genre tags, release date, and miscellaneous information like record labels or related artists/composers. Without these, it would be difficult to differentiate a house track from a country song.',
+ text3: 'Using helper functions, I grabbed a few reference tracks that I liked that are underground (less than 1000 views) and ran them through the system to see what gem scores they got. Then over time, I tweaked the weights of different signals and filters to make sure that those reference tracks consistently got high gem scores.'
 },
 {
   label: 'Result',
-  text: 'The result is a discovery experience that feels like digging through a curated record bin. Instead of endless scrolling, users consistently uncover early, high-quality tracks that feel fresh and worth saving. Essentially as if you\'re digging through crates in the back of a record store and finding that one gem that hasn\'t been discovered yet. Although the algorithm isn\'t perfect, it does a decent job of finding music that feels fresh and underground. It uses a neat Tinder-like swiping interface that makes it easy to quickly save tracks you like and discard ones you don\'t.',
+  text: 'The result is a music discovery app that genuinely feels like digging through a decently curated record bin. Users can swipe through tracks using swipe mode, save tracks that they like, and skip ones that they do not. Even though the app is not perfect, it consistently surfaces music that feels underground, intentional and worth listening to.',
 },
     ],
   },
