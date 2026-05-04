@@ -79,8 +79,9 @@ export const projectsData = {
     description: 'Music discovery app that ranks underground tracks using engagement and rarity signals from YouTube data.',
     fullDescription: 'Crates is a music discovery app that surfaces high-quality underground tracks by combining engagement signals, rarity indicators, and creator momentum from YouTube data. The goal is to help listeners find songs that feel fresh before they break out, while keeping the experience fast, curated, and easy to explore.',
     overviewParagraphs: [
-      'Crates is built around the idea that good discovery should feel like digging through an expertly tagged record bin, not scrolling a feed that rewards whatever is already loudest. The app uses YouTube engagement signals and scarcity cues to highlight tracks with real underground momentum.',
-      'The product framing leaves room to explain how signals are weighted, how rankings are refreshed, and how the interface balances surfacing niche gems without burying the strongest picks. That makes the page read like a product case study rather than a generic music app.',
+      'Let’s be real. Finding new music sucks. Sure, you have Soundcloud where you could browse playlists to find new songs, or Spotify’s DJ feature, but on one hand, you have to dig through a bunch of trash, and on the other, Spotify has this weird guy talking to you while you’re trying to listen to new songs. These platforms constantly feed you mainstream music while you’re just trying to find something you genuinely like. It all just seems pretty unintuitive. ',
+      'I’ve dealt with this issue first-hand. I personally listen to lots of UK Garage, oldschool house music, deep house, etc. These algorithms would constantly feed me very mainstream, boring music that sounds like every other song.',
+      'That’s where my idea came in. An app that dumbs it down for you with an algorithm that’s specifically meant to feed you music you’ve never heard before. Tinder, but for music.'
     ],
     technologies: ['REACT', 'YOUTUBE DATA', 'RANKING SIGNALS', 'UX DESIGN'],
     year: '2025',
@@ -92,19 +93,24 @@ export const projectsData = {
     details: [
      {
   label: 'Overview',
-  text: 'Music discovery shouldn’t feel like digging through garbage to find one good track. I always listen to underground tracks that I find on Soundcloud. The problem is, their discovery system is bad. For example, a house track on soundcloud can be mellow and chill, but all their algorithm knows about you is that you listened to a House track, so it would also recommend house tracks that are the exact opposite of what you like, as well as songs that are well-known and popular. Crates is built to give you the whole shaabang. It uses YouTube data to surface tracks that are underground using simple filters, and allows you to use more specific filters to find tracks that are similar to what you like.',
+  text: 'I built an app using the Youtube API that helps you look for underground music. The algorithm is meant to give you tracks that you’ve likely never heard before, just like you’re digging through crates of records at the back of a thrift shop. Just like Tinder, the app has a swiping feature that lets you quickly like or dislike tracks, or even mark a track as a “gem” if you really like a track.',
+
+text2: 'There are quick-action buttons you can press to search a song on various streaming platforms for you to save them to your personal library, as well as a playlist feature that saves to your local browser in case you wanted to organize your liked songs.',
+
+text3: 'The app rates tracks with a “Gem Score”, which is a ranking system that is meant to quantify quality. The score is weighted on track engagement, staying power (how well a track continues to perform over time), and other various indicators provided by the track’s metadata.'
+
 },
 {
   label: 'Challenge',
-  text: 'The hardest problem wasn’t finding underground tracks, it was filtering out junk and non music related content. Initially, the algorithm was picking up on YouTube shorts and Minecraft Lets Play videos, so I had to figure out how to actually filter them out. Then I remembered the \'topic\' feature on YouTube, which are auto-generated channels that host official audio releases with clean metadata. They essentially act like a structured music layer inside YouTube, which made them a strong signal for real tracks.',
-  text2: 'Another problem was that balancing the gem score system. What is the difference between a track with a high gem score and a low gem score?'
+  text: 'The main issue was filtering out noise. In the app’s early stages, it would output YouTube shorts or Minecraft Let’s Play videos, so I had to figure out a way to have the track only provide music. Another problem was balancing the gem score system, and figuring out a meaning behind it. The main point of the gem score system is to find tracks that have good metadata. I had to build a robust system that not only filters out trash, but somehow quantify YouTube metadata in a way where it determines whether a track is actually music, and whether the track is worth listening to despite its low exposure.',
+  text2: 'So essentially, it comes down to: filtering out obvious garbage (YouTube shorts, gaming videos, etc.), building something that determines the likelihood that a video is actually music, and putting it all through a system that generates a one out of ten score on: how many views a track has (lower = more underground), engagement (likes and comments relative to views), how recent it is, whether it comes from a reliable source, and how strong the “this is actually music” signal is.'
   
 },
 {
   label: 'Solution',
-  text: 'I initially had the plan to  use the SoundCloud API, but I quickly realized that their API is gated to users who have an Artist Pro plan. I already have a Go+ subscription, so I didn\'t really want to pay extra just to get access to the API. So I switched to YouTube. Completely free, with limits that are pretty generous.',
- text2: 'Crates uses Youtube Topic channels as a strong quality signal. Filtering for topic-only channels got rid of a lot of junk and non-music content. Every track also has metadata that gives the algorithm more to work with, such as views, likes, comments, genre tags, release date, and miscellaneous information like record labels or related artists/composers. Without these, it would be difficult to differentiate a house track from a country song.',
- text3: 'Using helper functions, I grabbed a few reference tracks that I liked that are underground (less than 1000 views) and ran them through the system to see what gem scores they got. Then over time, I tweaked the weights of different signals and filters to make sure that those reference tracks consistently got high gem scores.'
+  text: 'Crates uses Youtube Topic channels as a strong quality signal. Filtering for topic-only channels got rid of a lot of junk and non-music content. Every track also has metadata that gives the algorithm more to work with, such as views, likes, comments, genre tags, release date, and miscellaneous information like record labels or related artists/composers',
+ text2: 'Without these, it would be difficult to differentiate a house track from a country song. Using helper functions, I grabbed a few reference tracks that I liked that are underground (less than 1000 views) and ran them through the system to see what gem scores they got. Then over time, I tweaked the weights of different signals and filters to make sure that those reference tracks consistently got decently high gem scores.',
+
 },
 {
   label: 'Result',
