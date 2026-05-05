@@ -1,14 +1,72 @@
+import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { projectsData } from '../data/projects'
-import { MdConstruction } from 'react-icons/md'
+import { MdClose, MdConstruction, MdZoomIn } from 'react-icons/md'
 import Grainient from './Granient'
 
 const labelClass = 'text-[0.74rem] uppercase tracking-[0.16em] text-[#f5f1e8b8]'
 const surfaceClass = 'border border-white/10 bg-white/[0.015]'
 const imagePlaceholderClass =
   'grid min-h-[320px] place-items-center border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.12),rgba(255,255,255,0.02)_68%)] font-serif text-[3rem] text-[#f5f1e8b8]'
+const zoomableImageClass =
+  'group/image relative block h-full w-full cursor-zoom-in overflow-hidden bg-transparent p-0 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff6a00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]'
+
+function ZoomableProjectImage({ src, alt, className, onOpen }) {
+  return (
+    <button type="button" className={zoomableImageClass} onClick={() => onOpen(src, alt)} aria-label={`Open ${alt} image preview`}>
+      <img src={src} alt={alt} className={`${className} transition duration-200 group-hover/image:scale-[1.02]`} />
+      <span className="pointer-events-none absolute right-4 top-4 grid h-10 w-10 place-items-center border border-white/15 bg-black/45 text-[#f5f1e8] opacity-0 backdrop-blur-sm transition duration-200 group-hover/image:opacity-100 group-focus-visible/image:opacity-100">
+        <MdZoomIn className="h-5 w-5" aria-hidden="true" />
+      </span>
+    </button>
+  )
+}
+
+function ImagePreviewDialog({ image, onClose }) {
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [onClose])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#050505]/95 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${image.alt} enlarged preview`}
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        className="absolute right-5 top-5 grid h-11 w-11 place-items-center border border-white/15 bg-white/[0.04] text-[#f5f1e8] transition duration-200 hover:border-[#ff6a0057] hover:bg-[#ff6a0014] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff6a00]"
+        onClick={onClose}
+        aria-label="Close image preview"
+      >
+        <MdClose className="h-6 w-6" aria-hidden="true" />
+      </button>
+
+      <figure className="grid max-h-[90vh] max-w-[94vw] gap-4" onClick={(event) => event.stopPropagation()}>
+        <img src={image.src} alt={image.alt} className="max-h-[82vh] max-w-[94vw] object-contain" />
+        <figcaption className="text-center text-[0.78rem] uppercase tracking-[0.16em] text-[#f5f1e8b8]">
+          {image.alt}
+        </figcaption>
+      </figure>
+    </div>
+  )
+}
 
 export default function ProjectPage() {
+  const [activeImage, setActiveImage] = useState(null)
   const { id } = useParams()
   const paramId = id ?? ''
 
@@ -35,6 +93,10 @@ export default function ProjectPage() {
     .filter((project) => project.id !== currentProject.id)
     .slice(0, 2)
 
+  const openImagePreview = (src, alt) => {
+    setActiveImage({ src, alt })
+  }
+
   return (
     <div className="w-full">
       <section className="mx-auto grid max-w-[1400px] grid-cols-2 items-center gap-12 border-b border-white/10 px-8 py-20 max-[1100px]:grid-cols-1 max-md:px-4 max-md:py-16">
@@ -57,7 +119,12 @@ export default function ProjectPage() {
 
         <div className={imagePlaceholderClass}>
           {currentProject.image ? (
-            <img src={currentProject.image} alt={`${currentProject.title} preview`} className="h-full w-full object-cover" />
+            <ZoomableProjectImage
+              src={currentProject.image}
+              alt={`${currentProject.title} preview`}
+              className="h-full w-full object-cover"
+              onOpen={openImagePreview}
+            />
           ) : (
             currentProject.id
           )}
@@ -83,7 +150,12 @@ export default function ProjectPage() {
           <div className="grid gap-12">
             <div className="grid min-h-[420px] place-items-center overflow-hidden border border-white/10 bg-[radial-gradient(circle_at_center,rgba(0,183,255,0.14),rgba(255,255,255,0.02)_68%)] font-serif text-[3rem] text-[#f5f1e8b8] max-md:min-h-[260px]">
               {currentProject.detailImage ? (
-                <img src={currentProject.detailImage} alt={`${currentProject.title} detail`} className="h-full w-full object-cover" />
+                <ZoomableProjectImage
+                  src={currentProject.detailImage}
+                  alt={`${currentProject.title} detail`}
+                  className="h-full w-full object-cover"
+                  onOpen={openImagePreview}
+                />
               ) : (
                 currentProject.id
               )}
@@ -134,7 +206,12 @@ export default function ProjectPage() {
                 if (src) {
                   return (
                     <div key={`gallery-${index}`} className="min-h-[220px] overflow-hidden border border-white/10 bg-black max-md:min-h-[260px]">
-                      <img src={src} alt={`${currentProject.title} gallery ${index + 1}`} className="h-full w-full object-cover" />
+                      <ZoomableProjectImage
+                        src={src}
+                        alt={`${currentProject.title} gallery ${index + 1}`}
+                        className="h-full w-full object-cover"
+                        onOpen={openImagePreview}
+                      />
                     </div>
                   )
                 }
@@ -250,6 +327,8 @@ export default function ProjectPage() {
           })}
         </div>
       </section>
+
+      {activeImage ? <ImagePreviewDialog image={activeImage} onClose={() => setActiveImage(null)} /> : null}
     </div>
   )
 }
