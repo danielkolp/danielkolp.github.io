@@ -17,7 +17,7 @@ export const projectsData = {
     id: '05',
     title: 'Prompt Engine',
     subtitle: 'A fast, AI powered prompt-building tool.',
-    description: 'Prompt-building tool for composing reusable AI instructions and workflow-ready outputs.',
+    description: 'An AI powered tool that helps you build better prompts for AI.',
     fullDescription: 'Prompt Engine is a prompt-building tool for turning rough AI requests into structured, reusable instructions. It focuses on clarifying context, constraints, tone, and output format so users can move from an idea to a stronger working prompt faster.',
     overviewParagraphs: [
       'I\'ve always had a love/hate relationship with prompt engineering (mostly hate). Sometimes, I wish ChatGPT or Claude would just understand what I meant without me having to spend 15 minutes trying to figure out how to explain every single detail. That\'s the problem with having a vague, but powerful idea in your head. My personal workflow consists of starting with a rough prompt or idea, feed it to ChatGPT and then put the refined prompt into Codex along with a wireframe of what I want to build.',

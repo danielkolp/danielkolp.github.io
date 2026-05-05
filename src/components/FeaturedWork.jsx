@@ -136,7 +136,7 @@ export default function FeaturedWork() {
       id: '05',
       featured: true,
       title: 'Prompt Engine',
-      description: 'Prompt-building tool for composing reusable AI instructions and workflow-ready outputs.',
+      description: 'An AI powered tool that helps you build prompts for AI.',
       technologies: ['REACT', 'AI WORKFLOWS', 'UX DESIGN'],
       overlayImage: promptEngineLogo,
     },
