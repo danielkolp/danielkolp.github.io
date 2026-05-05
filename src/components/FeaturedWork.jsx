@@ -3,14 +3,14 @@ import { MdConstruction } from 'react-icons/md'
 import Grainient from './Granient'
 import graffitiGame1 from '../assets/images/graffitigame1.png'
 import cratesImage from '../assets/images/crates.png'
+import promptEngineLogo from '../assets/images/promptenginegallery/promptenginelogo.png'
 const actionLinkClass =
   'relative inline-flex w-fit items-center gap-2 pb-1 text-[0.78rem] uppercase tracking-[0.14em] text-[#f5f1e8] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-[0.2] after:bg-[linear-gradient(90deg,#ff6a00,#00b7ff)] after:transition-transform after:duration-200 hover:after:scale-x-100'
 
-const bentoSizeById = {
-  '01': 'md:col-span-2 lg:col-span-2 lg:row-span-2 lg:min-h-[560px]',
-  '02': 'md:col-span-2 lg:col-span-2 lg:min-h-[270px]',
-  '03': 'lg:col-span-1',
-  '04': 'lg:col-span-1',
+const bentoSizeByType = {
+  featured: 'md:col-span-2 lg:col-span-2 lg:row-span-2 lg:min-h-[560px]',
+  wide: 'md:col-span-2 lg:col-span-2 lg:min-h-[270px]',
+  small: 'lg:col-span-1',
 }
 
 const cardClass =
@@ -21,10 +21,11 @@ const constructionCardClass =
 
 function BentoProjectCard({ project, featured = false }) {
   const isUnderConstruction = project.underConstruction === true
+  const bentoSizeClass = bentoSizeByType[featured ? 'featured' : project.size ?? 'small'] ?? ''
 
   if (isUnderConstruction) {
     return (
-      <div className={`${constructionCardClass} ${bentoSizeById[project.id] ?? ''}`} aria-label="Under construction">
+      <div className={`${constructionCardClass} ${bentoSizeClass}`} aria-label="Under construction">
         <div className="absolute inset-0">
           <Grainient
           color1="#ff6a00"
@@ -65,7 +66,7 @@ function BentoProjectCard({ project, featured = false }) {
   }
 
   return (
-    <Link to={`/project/${project.id}`} className={`${cardClass} ${bentoSizeById[project.id] ?? ''}`}>
+    <Link to={`/project/${project.id}`} className={`${cardClass} ${bentoSizeClass}`}>
       <div className="absolute inset-0">
         {project.image ? (
           <img src={project.image} alt={`${project.title} preview`} className="h-full w-full object-cover" />
@@ -91,6 +92,14 @@ function BentoProjectCard({ project, featured = false }) {
             zoom={featured ? 0.92 : 0.93}
           />
         )}
+        {project.overlayImage ? (
+          <img
+            src={project.overlayImage}
+            alt=""
+            aria-hidden="true"
+            className="absolute left-1/2 top-[38%] w-[min(78%,38rem)] -translate-x-1/2 -translate-y-1/2 object-contain opacity-95 drop-shadow-[0_18px_42px_rgba(0,0,0,0.35)] transition duration-200 group-hover:scale-[1.02] max-md:top-[34%] max-md:w-[86%]"
+          />
+        ) : null}
       </div>
 
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.08)_0%,rgba(10,10,10,0.48)_44%,rgba(10,10,10,0.9)_100%)] transition duration-200 group-hover:bg-[linear-gradient(180deg,rgba(10,10,10,0.02)_0%,rgba(10,10,10,0.36)_42%,rgba(10,10,10,0.84)_100%)]" />
@@ -124,29 +133,32 @@ function BentoProjectCard({ project, featured = false }) {
 export default function FeaturedWork() {
   const projects = [
     {
-      id: '01',
+      id: '05',
       featured: true,
-      title: 'Graffiti Game',
-      description: 'A multiplayer 3D drawing game built with Three.js.',
-      technologies: ['REACT', 'THREE.JS', 'WEBGL', 'BLENDER', 'SOCKET.IO'],
-      image: graffitiGame1,
+      title: 'Prompt Engine',
+      description: 'Prompt-building tool for composing reusable AI instructions and workflow-ready outputs.',
+      technologies: ['REACT', 'AI WORKFLOWS', 'UX DESIGN'],
+      overlayImage: promptEngineLogo,
     },
     {
       id: '02',
+      size: 'wide',
       title: 'Crates',
       description: 'Music discovery app that ranks underground tracks using engagement and rarity signals from YouTube data.',
       technologies: ['REACT', 'YOUTUBE DATA'],
       image: cratesImage,
     },
     {
-      id: '03',
-      title: 'Prompt Lab',
-      description: 'AI prompt generator for faster, better results.',
-      technologies: ['REACT', 'NEXT.JS'],
-      underConstruction: true,
+      id: '01',
+      size: 'small',
+      title: 'Graffiti Game',
+      description: 'A multiplayer 3D drawing game built with Three.js.',
+      technologies: ['REACT', 'THREE.JS', 'WEBGL', 'BLENDER', 'SOCKET.IO'],
+      image: graffitiGame1,
     },
     {
       id: '04',
+      size: 'small',
       title: 'Frame Shift',
       description: 'Interactive motion experiments for web storytelling.',
       technologies: ['GSAP', 'WEBGL'],
@@ -154,8 +166,8 @@ export default function FeaturedWork() {
     },
   ]
 
-  const featured = projects[0]
-  const secondary = projects.slice(1)
+  const featured = projects.find((project) => project.featured) ?? projects[0]
+  const secondary = projects.filter((project) => project.id !== featured.id)
 
   return (
     <section id="work" className="mx-auto max-w-[1400px] border-t border-white/10 px-8 py-24 max-md:px-4 max-md:py-16">

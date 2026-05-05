@@ -8,8 +8,44 @@ import cratesDetailImage from '../assets/images/cratesdetail.png'
 import cratesImg1 from '../assets/images/cratesgallery/cratesimg1.png'
 import cratesImg2 from '../assets/images/cratesgallery/cratesimg2.png'
 import cratesImg3 from '../assets/images/cratesgallery/cratesimg3.png'
+import promptEngine1 from '../assets/images/promptenginegallery/promptengine1.png'
+import promptEngine2 from '../assets/images/promptenginegallery/promptengine2.png'
+import promptEngine3 from '../assets/images/promptenginegallery/promptengine3.png'
 
 export const projectsData = {
+  '05': {
+    id: '05',
+    title: 'Prompt Engine',
+    subtitle: 'A fast, AI powered prompt-building tool.',
+    description: 'Prompt-building tool for composing reusable AI instructions and workflow-ready outputs.',
+    fullDescription: 'Prompt Engine is a prompt-building tool for turning rough AI requests into structured, reusable instructions. It focuses on clarifying context, constraints, tone, and output format so users can move from an idea to a stronger working prompt faster.',
+    overviewParagraphs: [
+      'I\'ve always had a love/hate relationship with prompt engineering (mostly hate). Sometimes, I wish ChatGPT or Claude would just understand what I meant without me having to spend 15 minutes trying to figure out how to explain every single detail. That\'s the problem with having a vague, but powerful idea in your head. My personal workflow consists of starting with a rough prompt or idea, feed it to ChatGPT and then put the refined prompt into Codex along with a wireframe of what I want to build.',
+      'That\'s where my idea of a prompt-building tool came in. An AI that helps you work with AI better. The tool is meant to help you break up your intent into pills, such as "goals", "restraints", "output style", and "format". So instead of dumping all your instructions into a big old text box, you can break it up into smaller components, and then the system generates a refined prompt that leads to higher-quality AI outputs.',
+      'The app uses Groq and Meta LLama 70B Versatile to power the prompt refinement.'
+    ],
+    technologies: ['REACT', 'AI', 'PROMPT SYSTEMS', 'UX DESIGN'],
+    year: '2026',
+    role: 'Product Developer',
+    link: 'https://danielkolp.github.io/promptengine/',
+    image: promptEngine1,
+    detailImage: promptEngine2,
+    gallery: [promptEngine1, promptEngine2, promptEngine3],
+    details: [
+      {
+        label: 'Challenge',
+        text: 'What I had trouble with initially wasn\'t actually the implementation of the AI, it was configuring the system prompt in a way where the AI could come out of its shell a little bit. If the system prompt is too basic, the output is going to be basic. It also had to be structured in a JSON format so that the app could actually grab the different components and display them in the UI. For example, A JSON field that the AI could receive would be something like "goals" = "I want to make a website", "constraints" = "i dont wanna code". The AI would then read that and be like "ok, the user wants to make a website, and they dont wanna code", and then it would generate a prompt based on that information. So the challenge was really telling the AI "here\'s information, give me a good prompt based on that information".'
+      },
+      {
+        label: 'Solution',
+        text: 'I structured the system prompt to clearly define the expected input and output format. I had to experiment with different constraints and instructions to find a proper balance that would guide the AI to produce useful and structured prompts. I gave it a hard word limit, told it to avoid generic phrases, and told it how to think about the user\'s input. This helps it convert vague instructions made by lazy humans into something more specific and structured.',
+      },
+      {
+        label: 'Result',
+        text: 'The result is a really straight-forward tool where you can input different components of a prompt, and it generates a refined prompt that you can paste into your AI of choice. The tool is meant to help create a pipeline for users to go from a vague idea into a finished product without having to spend a lot of time prompting AI and tweaking prompts. This has been a really fun experiment for me, and I think it has some potential to be a useful tool for people who want to work with AI but find prompt engineering to be a barrier.',
+      },
+    ],
+  },
   '01': {
     id: '01',
     title: 'Graffiti Game',
