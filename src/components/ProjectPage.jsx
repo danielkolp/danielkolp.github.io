@@ -10,6 +10,18 @@ const imagePlaceholderClass =
   'grid min-h-[320px] place-items-center border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.12),rgba(255,255,255,0.02)_68%)] font-serif text-[3rem] text-[#f5f1e8b8]'
 const zoomableImageClass =
   'group/image relative block h-full w-full cursor-zoom-in overflow-hidden bg-transparent p-0 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff6a00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]'
+const textFieldPattern = /^text\d*$/
+
+function getOrderedTextFields(item) {
+  return Object.entries(item)
+    .filter(([key, value]) => textFieldPattern.test(key) && typeof value === 'string' && value.trim())
+    .sort(([keyA], [keyB]) => {
+      const orderA = keyA === 'text' ? 1 : Number(keyA.replace('text', ''))
+      const orderB = keyB === 'text' ? 1 : Number(keyB.replace('text', ''))
+      return orderA - orderB
+    })
+    .map(([, value]) => value)
+}
 
 function ZoomableProjectImage({ src, alt, className, onOpen }) {
   return (
@@ -178,6 +190,25 @@ export default function ProjectPage() {
                 </article>
               ))}
             </div>
+
+            {currentProject.featureSections?.length ? (
+              <div className="grid gap-8 border-y border-white/10 py-12">
+                {currentProject.featureSections.map((section) => (
+                  <article key={section.title} className="grid gap-6">
+                    <h2 className="m-0 font-serif text-[clamp(3.25rem,8vw,7rem)] font-normal uppercase leading-[0.9] text-[#f5f1e8]">
+                      {section.title}
+                    </h2>
+                    <div className="grid gap-4">
+                      {getOrderedTextFields(section).map((paragraph, index) => (
+                        <p key={`${section.title}-text-${index}`} className="m-0 max-w-[58rem] text-[1.08rem] leading-[2] text-[#f5f1e8b8]">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : null}
 
             <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
               {currentProject.gallery.map((item, index) => {

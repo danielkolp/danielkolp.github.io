@@ -126,6 +126,23 @@ export const projectsData = {
     image: cratesImage,
     detailImage: cratesDetailImage,
     gallery: [cratesImg1, cratesImg2, cratesImg3],
+    featureSections: [
+      {
+        title: 'The Algorithm',
+        text: 'The idea of a seeding system came to me early on. It was important to me that results seemed truly randomized and not fixed. So I fine-tuned a system where the app generates a seed based on an 8-16 digit number that controls what kind of music the app looks for, what search terms it uses, what year range it looks for, and how the results are ordered. The seed doesn\'t necessarily store the exact results, but it\'s meant to store the instructions of how to find the results.',
+        text2: 'When a seed is generated, the app uses that number to make choices. For example, the seed could decide to look for songs based on a certain genre or style, such as "rap" or "house". It also chooses search parameters, such as "official audio" or "vinyl rip". These terms are used because YouTube is full of random junk, and a normal search can return Shorts or gaming videos. The goal of a seeding system is to craft a search path that feels random, but somewhat controlled. It does this by building a seedProfile with a style, format, context, year, and upload window from the numeric seed.',
+        text3: 'A decent way to explain it is that each seed builds a sort of personality. One seed might lean more towards one style or genre, while another might lean towards a different style. A single seed might not be strict to show you the same results every time, but it\'s meant to show you results of the same "type" of music.',
+        text4: 'After the seed profile is built, the app builds a plan to find tracks. Instead of making six music searches immediately, it builds a search plan based on the seed profile. So one seed might create searches like "underground house vinyl rip, provided to YouTube by topic release, 2-step garage". The app does not run all of those at once. Instead, it only runs the first one, and then the next one, etc. Essentially, it lazy-loads searches. Why? Because YouTube search is really expensive. The quota limit for the YouTube data API is 10,000 units per day. Running "search.list" is 100 units. So instead of running 6 youtube searches immediately, the app runs one YouTube search for around 100 units and only loads more if the user needs more tracks.',
+        text5: 'Once the app builds a query plan, it sends one planned search to YouTube. YouTube then gives back a basic list of videos, but that first response doesn\'t have enough information to actually tell the app whether the search was a good search. So it takes the video IDs from that search and asks youtube for the video details for those specific videos. This search gives things like the title of the video, description. tags, view count, like count, comment count, duration, etc. These are needed because the app needs that information to determine the quality of the tracks in the search results.',
+        text6: 'The app then normalizes these videos into a format that it can work with and display in the front-end. Then it runs the videos through a quality filter to weed out non-music content based on clues given in the metadata.',
+        text7: 'However, tracks don\'t always describe themselves well in the metadata. So it was important to find a balance between filtering out garbage and allowing lazily described tracks to still show up.',
+      },
+      {
+        title: 'So what did I do?',
+        text: 'The app doesn\'t truly know whether a "rap" track is actually rap. This was a major constraint for the project. That\'s why there\'s a confidence system. It basically rates confidence on three levels: weak, medium and high. A track with high confidence would typically have metadata that strongly indicates it\'s a rap track, such as having "rap" in the tags or somewhere in the metadata. A track with medium confidence might have some remote clues that it\'s a rap track, but can\'t be sure. For example, a rap track with medium confidence can have "hip-hop, freestyle, drill, boom bap" in the tags, but not "rap". A track with low confidence literally means nothing in the metadata indicates that it\'s a rap track, however, YouTube returned it from a search that was rap-focused.',
+        text2: 'I\'ve implemented a gem score system that gives each track a score from 1 to 10 based on metadata quality. There is also a hidden score that is separate from the gem score. The hidden score has the sole purpose of ensuring the app could keep results varied without repeating the same artist in the same search.',
+      }
+    ],
     details: [
      {
   label: 'Overview',
