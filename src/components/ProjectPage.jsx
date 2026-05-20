@@ -177,16 +177,11 @@ export default function ProjectPage() {
               {currentProject.details.map((detail) => (
                 <article key={detail.label} className={`${surfaceClass} p-6`}>
                       <h3 className={`mb-3 block ${labelClass}`}>{detail.label}</h3>
-                      <p className="m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text}</p>
-                      {detail.text2 && (
-                        <p className="mt-4 m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text2}</p>
-                      )}
-                      {detail.text3 && (
-                        <p className="mt-4 m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text3}</p>
-                      )}
-                      {detail.text4 && (
-                        <p className="mt-4 m-0 max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]">{detail.text4}</p>
-                      )}
+                      {getOrderedTextFields(detail).map((paragraph, index) => (
+                        <p key={`${detail.label}-text-${index}`} className={`${index === 0 ? 'm-0' : 'm-0 mt-4'} max-w-[52rem] text-[1rem] leading-[1.95] text-[#f5f1e8b8]`}>
+                          {paragraph}
+                        </p>
+                      ))}
                 </article>
               ))}
             </div>
@@ -281,12 +276,14 @@ export default function ProjectPage() {
               </div>
             </div>
 
-            <a
-              href={currentProject.link}
-              className="inline-flex items-center justify-center border border-[#ff6a0057] bg-[#ff6a0014] px-4 py-4 text-[0.78rem] uppercase tracking-[0.14em] transition duration-200 hover:bg-[#ff6a0024] hover:shadow-[0_0_22px_rgba(255,106,0,0.12)]"
-            >
-              VISIT PROJECT -&gt;
-            </a>
+            {currentProject.link && currentProject.link !== '#' ? (
+              <a
+                href={currentProject.link}
+                className="inline-flex items-center justify-center border border-[#ff6a0057] bg-[#ff6a0014] px-4 py-4 text-[0.78rem] uppercase tracking-[0.14em] transition duration-200 hover:bg-[#ff6a0024] hover:shadow-[0_0_22px_rgba(255,106,0,0.12)]"
+              >
+                VISIT PROJECT -&gt;
+              </a>
+            ) : null}
           </aside>
         </div>
       </section>

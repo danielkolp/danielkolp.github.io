@@ -11,8 +11,70 @@ import cratesImg3 from '../assets/images/cratesgallery/cratesimg3.png'
 import promptEngine1 from '../assets/images/promptenginegallery/promptengine1.png'
 import promptEngine2 from '../assets/images/promptenginegallery/promptengine2.png'
 import promptEngine3 from '../assets/images/promptenginegallery/promptengine3.png'
+import councilImg1 from '../assets/images/councilgallery/councilimg1.png'
+import councilImg2 from '../assets/images/councilgallery/councilimg2.png'
+import councilImg3 from '../assets/images/councilgallery/councilimg3.png'
 
 export const projectsData = {
+  '06': {
+    id: '06',
+    title: 'Council',
+    subtitle: 'A multi-persona AI debate app where characters challenge an idea from conflicting perspectives.',
+    description: 'Council is an AI debate simulator where users enter a prompt and choose AI personalities to argue over it instead of receiving one polished answer.',
+    fullDescription: 'Council started as a funny idea: what if AI personas argued with each other instead of politely agreeing?',
+    overviewParagraphs: [
+      'I\'ve seen videos on Instagram where someone takes two phones, ChatGPT Voice on one phone, and Gemini on the other, and the two AI\'s were basically just talking to each other. That kind of had me thinking: what if we just remove the part where you need to phones? Council started as a pretty funny idea: what if AI personas talked to each other, and had biases based on their world views, backgrounds, and experiences?',
+      'For example, if you ask the group of AI personas "should make a web development project on music discovery?", one persona might say "yeah, no. terrible idea .." and they explain why. Another persona might say "wait, not so fast, that\'s a great idea if you execute it right", then they go back and forth, and you get a debate.',
+      'The point of this is not to get a perfectly polished answer that you can simply get from ChatGPT. The point is to get different perspectives from wildly different personalities, so you can see the strengths and weaknesses of an idea from different angles. It\'s more of a pressure test and perspective tool than a source of truth. The characters are messy, chaotic, and opinionated, all on purpose.',
+      'Technically, Council is built around multi-step AI generation rather than a single request. The app uses character-specific prompting, compressed debate context, structured JSON responses, local model testing through LM Studio and Qwen, and a Groq-backed production path. A simple debate can turn into multiple model calls very quickly, so the project became just as much about optimization, usability, conversational pacing, as it was about personality.'
+    ],
+    technologies: ['REACT', 'VITE', 'EXPRESS', 'TAILWIND CSS', 'GROQ', 'LM STUDIO', 'QWEN'],
+    year: '2026',
+    role: 'Product Developer',
+    link: 'https://danielkolp.github.io/thecouncil/',
+    image: councilImg1,
+    detailImage: councilImg2,
+    gallery: [councilImg1, councilImg2, councilImg3],
+    featureSections: [
+      {
+        title: 'Personality System',
+        text: 'The personality system ended up being the most important part of the app. This was what I spent most of my time on. This project was really less about building an AI app, and more about how to make AI to feel how I wanted it to feel. The characters were pretty much the heart and soul of the experience, so I had to get them right.',
+        text2: 'I started by giving each character a domain bias. Ray sees the world through systems, scalability, and technical feasibility. Victor thinks in markets, leverage, ROI, and whether the upside is real. Ava pushes momentum and emotional ambition. Nina focuses on how the user feels, whether the idea is polished, and whether the experience has enough care behind it. Marcus attacks weak logic. Samson is just there to cause a ruckus.',
+        text3: 'Then I had to shape their speech rhythm. Marcus needed to sound blunt and skeptical without becoming boring. Ava needed more momentum and confidence without sounding blindly positive. Ray needed practical technical objections. Victor needed to feel strategic and slightly dismissive. Nina needed emotional intelligence and polish. Samson needed fragmented thoughts, sudden pivots, overreactions, and emotional logic.',
+        text4: 'The conflict hooks are what made the council start to feel alive. Marcus hates weak reasoning, Victor dismisses emotional thinking, Ava pushes back against excessive caution, Ray attacks unrealistic systems, Nina defends the user experience, and Samson misunderstands things confidently enough to try to expose weird truths. Once those hooks were in place, the characters had reasons to collide without manually scripting every disagreement.',
+        text5: 'Samson became the clearest example of how specific the character writing had to be. Pure randomness was funny for about five seconds, then it became a little too much. He worked better when he said dumb but emotionally understandable things, derailed the conversation, overreacted, and occasionally made a valid point by accident. That was the difference between nonsense and a character who actually added something to the debate.',
+      },
+      {
+        title: 'Prompt Architecture',
+        text: 'The biggest technical challenge was avoiding what I started thinking of as AI agreement syndrome. Most large language models naturally try to be helpful, sound composed, and avoid conflict. That is useful in a lot of products, but it completely destroys the premise of Council. The app needed more chaos, disagreement, stubbornness, contradiction, emotional bias, ego, and flawed reasoning without making the output unreadable.',
+        text2: 'To solve that, I separated the character worldview from the debate mode. The character controls how the response thinks and sounds, while the debate mode controls the type of situation the council is reacting to. A startup idea, life decision, definition fight, thought experiment, and Absolute Chaos debate should all feel different, but Marcus still needs to feel like Marcus in every mode.',
+        text3: 'The other important piece was compressed debate context. Passing full transcripts into every generation call costs a LOT of tokens. Instead, I summarize previous arguments into short neutral points. That gives the next persona enough meaning to react to without forcing them to mimic the style of the previous response.',
+        text4: 'I also learned that long AI responses really killed the pacing. Shorter responses felt smarter, interruptions improved realism, and concise emotional attacks were usually more entertaining than detailed essays. This mattered most in Absolute Chaos mode, Definition Fights, and Thought Experiments, where the whole experience depends on the characters staying reactive and punchy.',
+        text5: 'The backend handles structured JSON generation, response cleanup, prompt-injection guardrails, cooldowns, rate limiting, token usage logging, and production-safe provider settings. Those pieces are not flashy, but they are what make the app closer to a real deployable product instead of a prompt demo.',
+      },
+      {
+        title: 'The Interface',
+        text: 'The UI is meant to feel warm and a little rustic, kind of like a courtroom or a council chamber. I wanted to keep a modern serif font for a bit of elegance and use a warm colour palette to make it feel inviting and a little theatrical in a way.',
+        text2: 'The goal was to make the interface feel inviting, simple, and interactive. The user flow indicates the user to type a discussion topic, choose a debate mode to set the tone, choose which characters to include, and then generate the debate.',
+        text3: 'You can also view saved debates, trigger rebuttal rounds, view verdict summaries, confidence scoring, copy and share tools, and choose between dark/light themes. Those features made the product feel less like a novelty and more like an actual tool with repeatable workflows.',
+        text4: 'The Council Verdict became an important anchor for the experience. It\'s kind of meant to feel like a character itself, like the most level-headed member of the council who summarizes everything and gives a final recommendation. It also gives the user a sense of closure and a takeaway from the debate. Without it, it could be hard to walk away with any insight.',
+      },
+      {
+        title: 'Local Testing',
+        text: 'LM Studio was a crucial part of the project because it let me iterate quickly without burning API credits. Running AI locally on your computer is very resource intensive. Luckily, I have a PC capable of comfortably handling that load. I tested locally with Qwen models (specifically the Qwen 3.5 9B parameter model) and used that setup to tweak persona prompts, compare character behavior, test emotional modes, and refine system instructions before moving toward Groq for the live version.',
+        text2: 'This phase made it obvious how quickly token usage explodes in multi-persona systems. One user message becomes the system prompt, persona instructions, debate mode instructions, previous context, output formatting rules, optional rebuttal context, and verdict generation. Something that feels like a simple debate can become several thousand tokens very quickly.',
+        text3: 'Different models also behaved very differently. Some models collapsed into agreement, lost personality after one round, repeated themselves, became too formal, or ignored emotional instructions. Others roleplayed aggressively, maintained conflict, improvised naturally, and stayed emotionally distinct. I started realizing that for entertainment-focused AI apps, model personality can matter almost as much as raw intelligence.',
+        text4: 'That shaped the architecture of the app. The user can enter a local server URL and API model identifier in settings, which makes it easier to test locally before relying on a hosted model. For a project where tone and character behavior matter so much, that fast feedback loop was essential.',
+      },
+      {
+        title: 'Emotional Modes',
+        text: 'The emotional modes are there to influence the tone and dynamics of the debate, rather than judging how the characters are behaving. Calm, Heated, Divided, and Absolute Disaster do not change the whole app, but they change the emotional weather of the debate. They affect how aggressive the responses are, how they perceive each other, how certain they sound, and how volatile the council feels.',
+        text2: 'This added replayability without changing the core architecture. A practical startup idea can feel measured in Calm mode, tense in Heated mode, fractured in Divided mode, and completely unstable in Absolute Disaster. The same prompt can produce a very different experience depending on the mood of the room.',
+        text3: 'It also helped clarify what Council actually is. It\'s not only a decision tool, and it\'s not trying to be a perfectly objective source of truth. It\'s a perspective and entertainment tool. Once I accepted that, the characters became funnier, more human, and more memorable.',
+      },
+    ],
+    details: [],
+  },
   '05': {
     id: '05',
     title: 'Prompt Engine',

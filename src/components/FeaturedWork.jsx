@@ -4,6 +4,7 @@ import Grainient from './Granient'
 import graffitiGame1 from '../assets/images/graffitigame1.png'
 import cratesImage from '../assets/images/crates.png'
 import promptEngineLogo from '../assets/images/promptenginegallery/promptenginelogo.png'
+import councilImg1 from '../assets/images/councilgallery/councilimg1.png'
 const actionLinkClass =
   'relative inline-flex w-fit items-center gap-2 pb-1 text-[0.78rem] uppercase tracking-[0.14em] text-[#f5f1e8] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-[0.2] after:bg-[linear-gradient(90deg,#ff6a00,#00b7ff)] after:transition-transform after:duration-200 hover:after:scale-x-100'
 
@@ -149,20 +150,20 @@ export default function FeaturedWork() {
       image: cratesImage,
     },
     {
+      id: '06',
+      size: 'small',
+      title: 'Council',
+      description: 'Multi-persona AI debate app where flawed characters argue over your ideas instead of politely agreeing.',
+      technologies: ['REACT', 'EXPRESS', 'GROQ', 'LM STUDIO'],
+      image: councilImg1,
+    },
+    {
       id: '01',
       size: 'small',
       title: 'Graffiti Game',
       description: 'A multiplayer 3D drawing game built with Three.js.',
       technologies: ['REACT', 'THREE.JS', 'WEBGL', 'BLENDER', 'SOCKET.IO'],
       image: graffitiGame1,
-    },
-    {
-      id: '04',
-      size: 'small',
-      title: 'Frame Shift',
-      description: 'Interactive motion experiments for web storytelling.',
-      technologies: ['GSAP', 'WEBGL'],
-      underConstruction: true,
     },
   ]
 
